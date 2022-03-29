@@ -1,0 +1,21 @@
+create table profile (
+  id uuid references auth.users not null,
+  updated_at timestamp with time zone,
+  username text unique,
+  bio text,
+
+  primary key (id),
+  unique(username),
+  constraint username_length check (char_length(username) >= 3)
+);
+
+alter table profile enable row level security;
+
+create policy "Users can create their own profile."
+  on profile for insert
+  with check ( auth.uid() = id );
+
+create policy "Users can update own profile."
+  on profile for update
+  using ( auth.uid() = id );
+

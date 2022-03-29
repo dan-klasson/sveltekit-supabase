@@ -1,0 +1,6 @@
+{
+  "prettier.trailingComma": "none",
+  "yaml.schemas": {
+    "https://json.schemastore.org/prettierrc.json": "file:///Users/danielklasson/code/sveltekit-supabase/.prettierrc.yaml"
+  }
+}

@@ -1,8 +1,28 @@
-<div class="container mx-auto">
-  <h1 class="text-2xl font-bold ">
-    Install Tailwind CSS 3
-    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600">
-      In SvelteKit
-    </span>
-  </h1>
-</div>
+<script lang="ts">
+  import supabase from "$lib/db";
+  import { user } from "$lib/stores";
+
+  export const redirect = () => {
+    return {
+      headers: { Location: "/auth/login" },
+      status: 302
+    };
+  };
+  // const user = supabase.auth.user();
+  // console.log(user);
+  // const session = supabase.auth.session();
+  // console.log(session);
+
+  user.set(supabase.auth.user());
+  supabase.auth.onAuthStateChange((_, session) => {
+    console.log("onAuthChange");
+    user.set(session.user);
+  });
+  console.log($user);
+</script>
+
+{#if $user}
+  logged in
+{:else}
+  not logged in
+{/if}

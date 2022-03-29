@@ -1,0 +1,4 @@
+usetabs: true
+singeQuote: true
+trailingComma: 'none'
+printWidth: 100
